@@ -10,4 +10,9 @@ cd cards-image-datasetclassification
 unzip -q cards-image-datasetclassification.zip
 ```
 
-## ?
+## How to run
+```
+python main.py
+```
+## Result
+![Training with 10 epochs](./asset/acc.png)

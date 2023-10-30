@@ -1,6 +1,6 @@
 # Cards image classification
 
-## How to prepare dataset
+## 1. How to prepare dataset
 - Download dataset from [here](https://www.kaggle.com/datasets/gpiosenka/cards-image-datasetclassification)
 - Then
 ```
@@ -9,10 +9,21 @@ mv cards-image-datasetclassification.zip cards-image-datasetclassification
 cd cards-image-datasetclassification
 unzip -q cards-image-datasetclassification.zip
 ```
-
-## How to run
+## 2. Set up environment
 ```
-python main.py
+conda create -n myenv python=3.9
+conda activate myenv
+pip install -r requirements.txt
+```
+## Training process
+Training script:
+```
+python main.py --train-folder ${train_folder} --test-folder ${valid_folder} --batch-size ${bs}  --learning-rate ${lr} --epochs ${epochs}
+
+```
+Example:
+```
+python main.py -bs 16 --epochs 1
 ```
 ## Result
 ![Training with 10 epochs](./asset/acc.png)

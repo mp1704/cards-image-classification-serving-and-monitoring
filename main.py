@@ -5,13 +5,24 @@ from tqdm import tqdm
 from model import *
 from dataset import *
 from utils import *
+import argparse
+
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    # Arguments users used when running command lines
+    parser.add_argument('--train-folder', default='./cards-image-datasetclassification/train', type=str, help='Where training data is located')
+    parser.add_argument('--test-folder', default='./cards-image-datasetclassification/test', type=str, help='Where training data is located')
+    parser.add_argument("--batch-size", '-bs', default=32, type=int, help ="number of batch size")
+    parser.add_argument('--learning-rate', '-lr', default=0.01, type=float, help='Learning rate')
+    parser.add_argument('--epochs', default=10, type=int, help="number of epochs")
+    args = parser.parse_args()
+
     transform = transforms.Compose([
-    transforms.ToTensor(),
-    transforms.Resize((128,128))
+        transforms.ToTensor(),
+        transforms.Resize((128,128))
     ])
-    train_folder = "./cards-image-datasetclassification/train"
-    test_folder = "./cards-image-datasetclassification/test"
+    train_folder = args.train_folder
+    test_folder = args.test_folder
 
     train_dataset = PlayingCardDataset(data_dir = train_folder,
                                     transform = transform)
@@ -19,17 +30,17 @@ if __name__ == '__main__':
                                     transform = transform)
 
     train_dataloader = DataLoader(dataset = train_dataset,
-                                batch_size = 32,
+                                batch_size = args.batch_size,
                                 shuffle = True)
     test_dataloader = DataLoader(dataset = test_dataset,
-                                batch_size = 32,
+                                batch_size = args.batch_size,
                                 shuffle = False)
     
     model = MyModel()
     loss_fn = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(model.parameters(), lr = 0.01)
+    optimizer = optim.Adam(model.parameters(), lr = args.learning_rate)
 
-    epochs = 10
+    # epochs = 10
     device = "cuda" if torch.cuda.is_available() else "gpu"
     model = model.to(device)
     print(f"Using {device}")
@@ -37,7 +48,7 @@ if __name__ == '__main__':
     train_losses = []
     test_losses = []
 
-    for epoch in range(epochs):
+    for epoch in range(args.epochs):
         running_loss = 0.
         train_acc = 0.
         model.train()   

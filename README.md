@@ -15,7 +15,7 @@ conda create -n myenv python=3.9
 conda activate myenv
 pip install -r requirements.txt
 ```
-## Training process
+## 3.Training process
 Training script:
 ```
 python main.py --train-folder ${train_folder} --test-folder ${valid_folder} --batch-size ${bs}  --learning-rate ${lr} --epochs ${epochs}
@@ -25,5 +25,5 @@ Example:
 ```
 python main.py -bs 16 --epochs 1
 ```
-## Result
+## 4. Result
 ![Training with 10 epochs](./asset/acc.png)

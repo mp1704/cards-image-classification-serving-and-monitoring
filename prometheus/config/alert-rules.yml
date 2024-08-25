@@ -1,0 +1,22 @@
+groups:
+- name: System alerts
+  rules:
+  - alert: NodeOutOfMemory
+    expr: node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes * 100 < 5
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      summary: Node out of memory
+      description: Node memory has reached {{ humanize $value}}%
+- name: cluster-rules
+  interval: 30s # defaults to global interval testing threshold
+  rules:
+  - alert: os_cluster_memory_low
+    expr: 100 - ((node_memory_MemAvailable_bytes{instance="node-exporter:9100",job="node"} * 100) / node_memory_MemTotal_bytes{instance="node-exporter:9100",job="node"}) > 20
+    for: 30s
+    labels:
+      severity: warning
+    annotations:
+      summary: "Ram usage exceeding 20%"
+      description: "for demo"

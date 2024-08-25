@@ -1,3 +1,5 @@
-torch
+fastapi[standard]
+pre-commit
 timm
 tqdm
+uvicorn

@@ -1,5 +1,6 @@
 cards-image-datasetclassification/
-
+main1.py
+*.pth
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

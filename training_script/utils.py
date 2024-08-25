@@ -1,5 +1,7 @@
 # Calculate accuracy (a classification metric)
 import torch
+
+
 def accuracy_fn(y_true, y_pred):
     """Calculates accuracy between truth labels and predictions.
 

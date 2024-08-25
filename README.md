@@ -25,5 +25,26 @@ Example:
 ```
 python main.py -bs 16 --epochs 1
 ```
-## 4. Result
-![Training with 10 epochs](./asset/acc.png)
+
+## 4. Serve model
+After training, we have the model saved in `model` folder. We can run FastAPI to serve the model.
+```
+cd app
+python main.py
+```
+Then open browser and go to `localhost:8088/docs` to see the API documentation.
+![fastapi](asset/fastapi.png)
+
+## 5. Set up Grafana dashboard
+
+```
+docker compose -f grafana/docker-compose.yml up -d
+```
+Then open browser and go to `localhost:3000` to see the Grafana dashboard.
+![fastapi](asset/gafana.png)
+## 6. Additonal
+### Set up pre-commit
+```
+pre-commit install
+pre-commit run --all-files
+```
